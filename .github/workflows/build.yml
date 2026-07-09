@@ -45,8 +45,8 @@ jobs:
 
       - name: Entrenar y guardar modelo
         run: |
-	  echo "EXPERIMENT_NAME: ${{ env.EXPERIMENT_NAME }}"
-	  python src/main.py #--data_path data/raw/adult.data --model_path models/adult-income-model.pkl --run_name ${{ env.RUN_NAME }} --mlflow_tracking_url ${{ env.MLFLOW_TRACKING_URL }} --experiment_name ${{ env.EXPERIMENT_NAME }} --model_name ${{ env.MODEL_NAME }}
+          echo "EXPERIMENT_NAME: -${{ env.EXPERIMENT_NAME }}-"
+          python src/main.py #--data_path data/raw/adult.data --model_path models/adult-income-model.pkl --run_name ${{ env.RUN_NAME }} --mlflow_tracking_url ${{ env.MLFLOW_TRACKING_URL }} --experiment_name ${{ env.EXPERIMENT_NAME }} --model_name ${{ env.MODEL_NAME }}
             
       - name: Crear run id en env
         run: echo "RUN_ID=$(cat run_id.txt)" >> $GITHUB_ENV
