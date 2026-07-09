@@ -12,9 +12,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env: 
-      MLFLOW_TRACKING_URL: ${ { secrets.MLFLOW_TRACKING_URL } }
-      EXPERIMENT_NAME: ${ { vars.EXPERIMENT_NAME || 'adult-income-model' } }
-      MODEL_NAME: ${ { vars.MODEL_NAME || 'adult-income-model' } }
+      MLFLOW_TRACKING_URL: ${{ secrets.MLFLOW_TRACKING_URL }}
+      EXPERIMENT_NAME: ${{ vars.EXPERIMENT_NAME || 'adult-income-model' }}
+      MODEL_NAME: ${{ vars.MODEL_NAME || 'adult-income-model' }}
     steps:
       - name: Generate RUN_NAME
         run: echo "RUN_NAME=run_$(date +'%Y%m%d_%H%M%S')" >> $GITHUB_ENV
