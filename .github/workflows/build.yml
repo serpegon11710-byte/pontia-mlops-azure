@@ -44,13 +44,13 @@ jobs:
           curl -o data/raw/adult.test https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.test
 
       - name: Entrenar y guardar modelo
-        run: python src/train.py #--data_path data/raw/adult.data --model_path models/adult-income-model.pkl --run_name ${{ env.RUN_NAME }} --mlflow_tracking_url ${{ env.MLFLOW_TRACKING_URL }} --experiment_name ${{ env.EXPERIMENT_NAME }} --model_name ${{ env.MODEL_NAME }}
+        run: python src/main.py #--data_path data/raw/adult.data --model_path models/adult-income-model.pkl --run_name ${{ env.RUN_NAME }} --mlflow_tracking_url ${{ env.MLFLOW_TRACKING_URL }} --experiment_name ${{ env.EXPERIMENT_NAME }} --model_name ${{ env.MODEL_NAME }}
             
       - name: Crear run id en env
         run: echo "RUN_ID=$(cat run_id.txt)" >> $GITHUB_ENV
 
       - name: Run model test
-        run: python src/test_model.py #--run_id ${{ env.RUN_ID }} --mlflow_tracking_url ${{ env.MLFLOW_TRACKING_URL }} --model_name ${{ env.MODEL_NAME }}
+        run: python model_tests/test_model.py #--run_id ${{ env.RUN_ID }} --mlflow_tracking_url ${{ env.MLFLOW_TRACKING_URL }} --model_name ${{ env.MODEL_NAME }}
 
-      - name: Registrar e MLflow 
-        run: python src/register_model.py #--run_id ${{ env.RUN_ID }} --mlflow_tracking_url ${{ env.MLFLOW_TRACKING_URL }} --model_name ${{ env.MODEL_NAME }}
+      - name: Registrar en MLflow 
+        run: python scripts/register_model.py #--run_id ${{ env.RUN_ID }} --mlflow_tracking_url ${{ env.MLFLOW_TRACKING_URL }} --model_name ${{ env.MODEL_NAME }}
